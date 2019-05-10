@@ -1,0 +1,57 @@
+body {
+	margin: 0px;
+	padding: 0;
+	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+}
+
+.header {
+	/* margin-top: -15px; to make header of small height*/
+	text-align: center;
+	color: white;
+	background-color: #333;
+	margin: 0;
+	padding: 0px, 0px, 5px, 0px;
+	height: 4em;
+	overflow: auto; /*this is to make header top space = 0 */
+}
+
+ul {
+	/* position: right; */
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
+}
+
+li {
+	float: right;
+}
+
+li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+a:hover:not(.active) {
+	background-color: #111;
+}
+
+.active {
+	background-color: #4CAF50;
+}
+
+#footer {
+	color: white;
+	background-color: #333;
+	padding: 15px;
+	width: 100%;
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	left: 0px;
+	text-align: center;
+}

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="Manage_Session_On_Each_Page">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <property name="context-root" value="Manage_Session_On_Each_Page"/>
+        <property name="java-output-path" value="/Manage_Session_On_Each_Page/build/classes"/>
+    </wb-module>
+</project-modules>
