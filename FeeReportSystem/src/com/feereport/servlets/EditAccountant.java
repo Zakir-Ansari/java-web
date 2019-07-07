@@ -24,7 +24,7 @@ public class EditAccountant extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		response.setContentType("text/html");
 		PrintWriter out=response.getWriter();
 		
@@ -36,7 +36,11 @@ public class EditAccountant extends HttpServlet {
 		String contact=request.getParameter("contact");
 		
 		AccountantBean bean=new AccountantBean(id,name, email, password, address, contact);
-		AccountantDao.update(bean);
+		int status = AccountantDao.update(bean);
+		if (status == 1) {
+			session.setAttribute("data_updated", "true"); 
+			
+		}
 		response.sendRedirect("ViewAccountant");
 		
 		out.close();

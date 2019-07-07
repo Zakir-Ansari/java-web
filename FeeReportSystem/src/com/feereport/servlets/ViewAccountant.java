@@ -54,7 +54,11 @@ public class ViewAccountant extends HttpServlet {
 					" </ul>" +
 					"<nav>");
 		
-			
+			if (session.getAttribute("data_updated") != null) {
+				out.println("<p style='color: red; text-align: center; font-size: 15px;'>Data Updated</p>");
+			}
+			session.removeAttribute("data_updated");
+
 			List<AccountantBean> list=AccountantDao.getAllRecords();
 			out.println("<table class='table table-bordered table-striped'>");
 			out.print("<tr><th>Id</th><th>Name</th><th>Email</th><th>Password</th><th>Address</th><th>Contact</th><th>Edit</th><th>Delete</th>");

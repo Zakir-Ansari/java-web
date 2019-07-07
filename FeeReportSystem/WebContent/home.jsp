@@ -15,7 +15,7 @@
 			<li><a class="active" href="#home">Home</a></li>
 		</ul>
 	</nav>
-	<div style="font-size: 10px; color: red;"><p>
+	<div style="text-align: center; font-size: 10px; color: red;"><p>
 	<%
 		if (request.getAttribute("no_user_logged_in") != null) {
 	%>
@@ -26,6 +26,7 @@
 	
 	</p></div>
 	<!-- Admin login form -->
+	<div align="center">
 	<h4>Admin Login Form</h4>
 	<form action="AdminLogin" method="post">
 		<table>
@@ -36,8 +37,11 @@
 			<tr>
 				<td>Password:</td>
 				<td><input type="password" name="password" required /></td>
+			</tr>
+			<tr>
+				<td></td>
 				<td>
-					<div class="error" style="font-size: 10px; color: red;">
+				<div class="error" style="font-size: 10px; color: red;">
 						<p>
 							<%
 								if (request.getAttribute("error") != null) {
@@ -51,6 +55,7 @@
 				</td>
 			</tr>
 			<tr>
+				<td></td>
 				<td><input type="submit" value="Login" /></td>
 			</tr>
 		</table>
@@ -70,10 +75,28 @@
 				<td><input type="password" name="password" required /></td>
 			</tr>
 			<tr>
+				<td></td>
+				<td>
+				<div class="error" style="font-size: 10px; color: red;">
+						<p>
+							<%
+								if (request.getAttribute("accountant_error") != null) {
+							%>
+							<%=request.getAttribute("accountant_error")%>
+							<%
+								}
+							%>
+						</p>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
 				<td><input type="submit" value="Login" /></td>
 			</tr>
 		</table>
 	</form>
+	</div>
 	<div class="footer">
 		<p>&copy;Copyright 2019. FeeReport.com | Creator: Zakir</p>
 	</div>

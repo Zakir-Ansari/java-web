@@ -58,7 +58,7 @@ public class EditAccountantForm extends HttpServlet {
 			
 			out.print("<h3 style=\"text-align: center; font-size: 20px;\">Edit Accountant Form</h3>");
 			out.println("<div align=\"center\" style=\"border:1px solid #555753; margin: 1% 30%;\">");
-			out.print("<form action='EditAccountant' method='post' style=\"margin-top: 30px; margin-bottom: 30px;\">");
+			out.print("<form action='EditAccountant' method='post' style=\"margin-top: 30px; margin-bottom: 2px;\">");
 			out.print("<table>");
 			out.print("<tr><td><input type='hidden' name='id' value='"+bean.getId()+"' /></td></tr>");
 			out.print("<tr><td>Name:</td><td><input type='text' name='name' value='"+bean.getName()+"'/></td></tr>");
@@ -68,7 +68,8 @@ public class EditAccountantForm extends HttpServlet {
 			out.print("<tr><td>Contact No:</td><td><input type='text' name='contact' value='"+bean.getContact()+"'/></td></tr>");
 			out.print("<tr><td colspan='2' align='center'><input type='submit' value='Update Accountant' class='btn btn-default'/></td></tr>");
 			out.print("</table>");
-			out.print("</form>");
+			out.println("</form>");
+			out.print("<a href=\"ViewAccountant\"><button style='margin-bottom: 25px;'>Cancel</button></a>");
 			out.println("</div>");
 			request.getRequestDispatcher("footer.jsp").include(request, response);
 			out.println("</body>");
