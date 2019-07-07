@@ -7,7 +7,7 @@ public class MySQL {
 	public static Connection connect() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			return DriverManager.getConnection("jdbc:mysql://localhost/shop", "root", "Zakir@1627");
+			return DriverManager.getConnection("jdbc:mysql://localhost/FeeManagementSystem", "root", "Zakir@12345");
 		} catch (Exception e) {
 			return null;
 		}

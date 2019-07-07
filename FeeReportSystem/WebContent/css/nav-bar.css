@@ -1,0 +1,48 @@
+body {
+	margin: 0px;
+}
+.brand {
+	color: white;
+	margin-top: 9px;
+	margin-bottom: 1px;
+	margin-right: 40px;
+	margin-left: 10px;
+}
+
+.nav-bar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.nav-bar li {
+  float: left;
+}
+
+.nav-bar li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.active {
+	background-color: #111;
+}
+.nav-bar li a:hover {
+ 	background-color: #111;
+}
+
+
+.footer {
+	background-color: #333;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	color: white;
+	text-align: center;
+}
