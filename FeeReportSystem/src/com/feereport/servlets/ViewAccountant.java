@@ -55,6 +55,7 @@ public class ViewAccountant extends HttpServlet {
 					"<nav>");
 		
 			if (session.getAttribute("data_updated") != null) {
+				//If data update successfully
 				out.println("<p style='color: red; text-align: center; font-size: 15px;'>Data Updated</p>");
 			}
 			session.removeAttribute("data_updated");
