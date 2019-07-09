@@ -19,6 +19,7 @@ public class Logout extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		session.removeAttribute("user");
+		session.removeAttribute("accountant");
 		session.invalidate();
 		response.sendRedirect("home.jsp");
 	}

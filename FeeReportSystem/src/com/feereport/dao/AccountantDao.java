@@ -27,6 +27,24 @@ public class AccountantDao {
 		return nextId;
 	}
 	
+	public static String getAccountantName(String email, String pass) {
+		String name = "";
+		
+		try {
+			Connection con = DB.getCon();
+			PreparedStatement ps = con.prepareStatement("select name from fee_accountant where email = '"+email+"' and password = '"+pass+"'");
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				name = rs.getString("name");
+			}
+			con.close();
+		}
+		catch (Exception ex) {
+			System.out.println(ex);
+		}
+		return name;
+	}
+	
 	public static int save(AccountantBean bean) {
 		int status = 0;
 		try {
