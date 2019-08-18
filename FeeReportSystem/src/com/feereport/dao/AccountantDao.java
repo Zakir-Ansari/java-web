@@ -15,8 +15,11 @@ public class AccountantDao {
 			Connection con = DB.getCon();
 			PreparedStatement ps = con.prepareStatement("select max(id) as max_id from fee_accountant");
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
+			if(rs.next()) {
 				nextId = rs.getInt("max_id")+1;
+			}
+			else {
+				nextId = 1;
 			}
 			con.close();
 		}

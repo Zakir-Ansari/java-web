@@ -11,17 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class AccountantHome
+ * Servlet implementation class AddStudentForm
  */
-@WebServlet("/AccountantHome")
-public class AccountantHome extends HttpServlet {
+@WebServlet("/AddStudentForm")
+public class AddStudentForm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
 		response.setContentType("text/html");
-		PrintWriter out=response.getWriter();
+		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession();
 		
 		if(session.getAttribute("accountant") == null) {
 			request.setAttribute("no_user_logged_in", "true");
@@ -36,19 +36,19 @@ public class AccountantHome extends HttpServlet {
 			out.println("<link rel=\"stylesheet\" href=\"css/adminhome.css\">");
 			out.println("</head>");
 			out.println("<body>");
-
+	
 			out.println("<nav class=\"nav-bar\">"
 					+ "<ul class=\"nav navbar-nav\">\n" + 
 					"		 <li><h2 class=\"brand\">FEE REPORT</h2></li>" +
-					"		 <li><a href=\"#\" class=\"active\">Home</a></li>\n" + 
-					"        <li><a href=\"AddStudentForm\">Add Student</a></li>\n" + 
+					"		 <li><a href=\"AccountantHome\">Home</a></li>\n" + 
+					"        <li><a href=\"#\" class=\"active\">Add Student</a></li>\n" + 
 					"        <li><a href=\"ViewStudent\">View Student</a></li>\n" + 
 					"        <li><a href=\"DueFee\">Due Fee</a></li>\n" + 
 					"        <li><a href=\"SearchStudentForm\">Search Student</a></li>\n" + 
 					"        <li><a href=\"Logout\">Logout</a></li>" +
 					" </ul>" +
 					"<nav>");
-			request.getRequestDispatcher("accountantHome.jsp").include(request, response);
+			request.getRequestDispatcher("AddStudentForm.jsp").include(request, response);
 			request.getRequestDispatcher("footer.jsp").include(request, response);
 			out.println("</body>");
 			out.println("</html>");

@@ -21,8 +21,6 @@ public class AccountantLogin extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.setContentType("text/html");
-		//PrintWriter out = response.getWriter();
 		
 		String email=request.getParameter("email");
 		String password=request.getParameter("password");
@@ -40,8 +38,5 @@ public class AccountantLogin extends HttpServlet {
 		    request.setAttribute("accountant_error", "Invalid email or password"); 
 			request.getRequestDispatcher("home.jsp").include(request, response);
 		}
-		
-		
 	}
-
 }
