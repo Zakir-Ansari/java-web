@@ -9,6 +9,8 @@ import javax.persistence.*;
 public class Alien {		//POJO
 	
 	@Id		//making it primary key
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "aid", nullable = false)
 	private int aid;
 	
 	//@Transient		//This will not be getting stored if annotated as transient 

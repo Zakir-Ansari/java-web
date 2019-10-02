@@ -16,14 +16,18 @@ public class App
     public static void main( String[] args )
     {
     	Alien a1 = new Alien();
+    	Alien a2 = new Alien();
     	//If you want to insert the data
     	AlienName name = new AlienName();
     	name.setFname("fname");
     	name.setLname("lname");
     	name.setEname("ename");
-    	a1.setAid(102);
+    	//a1.setAid(102);
     	a1.setAname(name);
     	a1.setColor("green");
+    	
+    	a2.setAname(name);
+    	a2.setColor("purple");
     	
     	Configuration con = new Configuration().configure().addAnnotatedClass(Alien.class);
     	//Get the registry object
@@ -33,7 +37,8 @@ public class App
     	Transaction tx = session.beginTransaction();
     	
     	//In case of data insertion
-    	session.save(a1);
+    	session.save(a1);    	
+    	session.save(a2);
     	
     	//In case of data display
     	//a1 = (Alien) session.get(Alien.class, 102);

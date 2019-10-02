@@ -6,16 +6,6 @@
 <hibernate-configuration>  
   
     <session-factory>
-        <!-- <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>  
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>  
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/practice_schema</property>  
-        <property name="hibernate.connection.username">root</property>  
-        <property name="hibernate.connection.password">Zakir@12345</property>
-        hbm2ddl.auto : Update: create if table doesnt exists | Create: create a new table everytime
-        <property name="hbm2ddl.auto">create</property>
-        To display the query in consol
-        <property name="show_sql">true</property> -->
-        
         <property name="hibernate.connection.driver_class">org.h2.Driver</property>  
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>  
         <property name="hibernate.connection.url">jdbc:h2:~/test</property>  
