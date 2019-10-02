@@ -31,21 +31,23 @@
 
 </head>
 <body>
-	<%
-		if(session.getAttribute("authentication") == null) {
-			response.sendRedirect("/login");
-		}
-	%>
+	
 	<spring:url value="/login" var="login" htmlEscape="true"/>
 	<spring:url value="/terminateSession" var="terminateSession" htmlEscape="true"/>
 	<spring:url value="/springAssessment" var="springAssessment" htmlEscape="true"/>
 	<spring:url value="/hibernateAssessment" var="hibernateAssessment" htmlEscape="true"/>
+	
+	<c:if test="${ userSession eq null }">
+		<% response.sendRedirect("login"); %>
+	</c:if>
+	Session: <p>${ userSession }</p>
+	
 	<div class="content">
 	<c:if test="${ current_user eq 'admin' }">
 		<h3>Select Reports</h3>
 		<a href="#">View list of all candidates</a><br>
 		<a href="#">View listof all test taken</a><br>
-		<a href="#">Logout</a>
+		<a href="${ terminateSession }">Logout</a>
 	</c:if>
 	
 	<c:if test="${ current_user eq 'candidate' }">

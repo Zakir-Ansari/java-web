@@ -15,7 +15,7 @@
 	<h1 style="text-align: center; font-size: 300%;">Welcome to Online Assessments</h1>
 	<h3 style="margin-left:25%; font-size: 200%;">Login</h3>
 	<div class="form-section">
-	<form:form action="login/do" modelAttribute="userDetails" method="post">	
+	<form:form action="validate" modelAttribute="userDetails" method="post">	
 			<label for="email">Email: </label><br>
 			<form:input type="text" id="email" path="email" required="required"/><br>
 
