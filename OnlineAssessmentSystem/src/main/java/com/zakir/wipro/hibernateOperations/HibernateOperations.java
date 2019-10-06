@@ -1,5 +1,8 @@
 package com.zakir.wipro.hibernateOperations;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,6 +11,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
+import com.zakir.wipro.pojo.TestResults;
 import com.zakir.wipro.pojo.UserDetails;
 
 public class HibernateOperations {
@@ -107,6 +111,33 @@ public class HibernateOperations {
 		return user;
 	}
 	
+	public List<UserDetails> getCandidateList() {
+		List<UserDetails> candidates = new ArrayList<UserDetails>();
+		closeSession();
+		if (session == null || session.isOpen() == false) {
+			session = getSessionForUserDetails(UserDetails.class);
+		}
+		Transaction tx = null;
+		
+		try {
+			tx = session.beginTransaction();
+			List candidate = session.createQuery("FROM UserDetails u").list();
+			for (Iterator iterator = candidate.iterator(); iterator.hasNext();){
+	            UserDetails user = (UserDetails) iterator.next(); 
+	            candidates.add(user);
+	         }
+			tx.commit();
+		}
+		catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			closeSession();
+		}		
+		return candidates;
+	}
+	
 	public String addCandidate(String fname, String lname, String email, String password, String uType) {
 		String response= "failure";
 		System.out.println("session: " + session);
@@ -181,5 +212,132 @@ public class HibernateOperations {
 			closeSession();
 		}
 		return "";
+	}
+	
+	public String dropAssessmentTableInitially() {
+		closeSession();
+		System.out.println("session: " + session);
+		if (session == null || session.isOpen() == false) {
+			session = getSessionForUserDetails(TestResults.class);
+		}
+		System.out.println("session: " + session);
+
+		Transaction tx = null;
+		
+		try {
+			tx = session.beginTransaction();
+			
+			 String hql = "delete from TestResults tr where tr.totalMarks = 50";
+			 session.createQuery(hql).executeUpdate();
+			/*
+			 * TestResults tr = (TestResults)session.get(TestResults.class, emailId);
+			 * session.delete(tr);
+			 */
+			tx.commit();
+			System.out.println("Deletion Done!!");
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			closeSession();
+		}
+		return "";
+	}
+	
+	public int insertIntoAssessmentResults(int id, String userEmail, String assessment, int score, String result ) {
+		int response = 0;
+		System.out.println("hibernate session in insert Into AssessmentResult: " + session);
+		closeSession();
+		if (session == null || session.isOpen() == false) {
+			session = getSessionForUserDetails(TestResults.class);
+		}
+		
+	    SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");  
+	    Date date = new Date();  
+	    String dateTime = formatter.format(date);
+	    System.out.println("saved date: "+ dateTime);  
+		
+		
+		Transaction tx = null;
+		TestResults testResult = null;
+		try {
+			tx = session.beginTransaction();
+			testResult = new TestResults();
+			testResult.setId(id);
+			testResult.setTestDate(dateTime);
+			testResult.setAssessmentName(assessment);
+			testResult.setTestMarks(score);
+			testResult.setEmailId(userEmail);
+			testResult.setTotalMarks(50);
+			testResult.setResult(result);
+			
+			session.save(testResult);
+			tx.commit();
+			System.out.println("Data Saved");
+			response = 1;
+		} catch(Exception ex) {
+			if (tx!=null) tx.rollback();
+	        ex.printStackTrace();
+		}
+		finally {
+			closeSession();
+		}
+
+		return response;
+	}
+	
+	public List<TestResults> getTestResultList() {
+		List<TestResults> results = new ArrayList<TestResults>();
+		closeSession();
+		if (session == null || session.isOpen() == false) {
+			session = getSessionForUserDetails(TestResults.class);
+		}
+		Transaction tx = null;
+		
+		try {
+			tx = session.beginTransaction();
+			List assessmentResults = session.createQuery("FROM TestResults tr").list();
+			for (Iterator iterator = assessmentResults.iterator(); iterator.hasNext();){
+	            TestResults testResult = (TestResults) iterator.next(); 
+	            results.add(testResult);
+	         }
+			tx.commit();
+		}
+		catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			closeSession();
+		}		
+		return results;
+	}
+	public int getIdForTestResultTable() {
+		int newId = 1;
+		closeSession();
+		if (session == null || session.isOpen() == false) {
+			session = getSessionForUserDetails(TestResults.class);
+		}
+		Transaction tx = null;
+		System.out.println("new Id initially: "+newId);
+		try {
+			tx = session.beginTransaction();
+			List assessmentResults = session.createQuery("FROM TestResults tr").list();
+			for (Iterator iterator = assessmentResults.iterator(); iterator.hasNext();){
+				TestResults testResult = (TestResults) iterator.next(); 
+				newId++;
+				System.out.println("new Id got: "+newId);
+	         }
+			tx.commit();
+		}
+		catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			closeSession();
+		}		
+		return newId;
 	}
 }

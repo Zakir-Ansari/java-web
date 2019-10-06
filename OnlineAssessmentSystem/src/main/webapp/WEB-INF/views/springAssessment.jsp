@@ -12,7 +12,7 @@
 </head>
 <body>
 
-	
+	<h1 style="text-align: center">Spring Assessment</h1>
 	<spring:url value="/evaluate/spring/test" var="evaluation" htmlEscape="true"/>
 	<div class="question-paper">
 		<form:form action="${ evaluation }" modelAttribute="selectedOption" method="post">

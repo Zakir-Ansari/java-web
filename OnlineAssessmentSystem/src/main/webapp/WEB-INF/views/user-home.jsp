@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Select Reports</title>
+<title>${ title }</title>
 <link href="<c:url value = "/Resources/style.css" />" rel="stylesheet">
 <style type="text/css">
 .content {
@@ -19,9 +19,23 @@
 	text-align: center;
 	margin-top: 40px;
 }
-.content a {
-	font-weight: bolder;
-	font-size: 25px;
+a:link, a:visited {
+  background-color: #ffffff;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: grey;
+  color: black;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  width:90%;
+  margin-bottom: 2px;
+}
+
+a:hover {
+  background-color: LightGray;
 }
 .content h3 {
 	font-size: 40px;
@@ -33,20 +47,17 @@
 <body>
 	
 	<spring:url value="/login" var="login" htmlEscape="true"/>
+	<spring:url value="/users/all" var="userList" htmlEscape="true"/>
+	<spring:url value="/tests/all" var="testList" htmlEscape="true"/>
 	<spring:url value="/terminateSession" var="terminateSession" htmlEscape="true"/>
 	<spring:url value="/springAssessment" var="springAssessment" htmlEscape="true"/>
 	<spring:url value="/hibernateAssessment" var="hibernateAssessment" htmlEscape="true"/>
 	
-	<c:if test="${ userSession eq null }">
-		<% response.sendRedirect("login"); %>
-	</c:if>
-	Session: <p>${ userSession }</p>
-	
 	<div class="content">
 	<c:if test="${ current_user eq 'admin' }">
 		<h3>Select Reports</h3>
-		<a href="#">View list of all candidates</a><br>
-		<a href="#">View listof all test taken</a><br>
+		<a href="${ userList }">View list of all candidates</a><br>
+		<a href="${ testList }">View listof all test taken</a><br>
 		<a href="${ terminateSession }">Logout</a>
 	</c:if>
 	

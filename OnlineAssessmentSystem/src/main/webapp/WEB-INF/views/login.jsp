@@ -21,7 +21,7 @@
 
 			<label for="password">Password:</label><br>
 			<form:input type="password" id="password" path="password" required="required"/><br>
-			<input type="submit" value="Login" id="submit"
+			<input type="submit" value="LOGIN" id="submit"
 					style="font-weight: bold"/>
 		</form:form>
 		<p>New User?  <a href="register">register here</a> </p>

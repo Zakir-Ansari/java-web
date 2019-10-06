@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -68,6 +67,9 @@ input[type=submit]:hover {
 			<label for="email">Email: </label>
 			<br>
 			<form:input type="email" id="email" path="email" required="required" />
+			<c:if test="${ userAlreadyExists eq 'yes' }">
+				<p style="color: red; font-size: 12px;margin-top: -2px;margin-bottom: -3px;">User Already Exists!!</p>
+			</c:if>
 			<br>
 			<label for="password">Password:</label>
 			<br>

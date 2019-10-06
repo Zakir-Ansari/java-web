@@ -1,6 +1,7 @@
 package com.zakir.wipro.backendLogic;
 
 import com.zakir.wipro.bean.SelectedOptions;
+import com.zakir.wipro.hibernateOperations.HibernateOperations;
 import com.zakir.wipro.pojo.HibernateAssessment;
 import com.zakir.wipro.pojo.SpringAssessment;
 
@@ -8,8 +9,9 @@ public class EvaluateMarks {
 	public String getEvaluations(SelectedOptions selectedOption, String forUser, String assignmentName) {
 		System.out.println("User name got: "+forUser);
 		HibernateAssessment HA = new HibernateAssessment();
+		HibernateOperations HO = new HibernateOperations();
 		SpringAssessment SA = new SpringAssessment();
-		String result = "failed";
+		String result = "Failed";
 		int obtainedMarks =0;
 		System.out.println("initial Marks: "+obtainedMarks);
 		
@@ -29,7 +31,22 @@ public class EvaluateMarks {
 		}
 		System.out.println("Final marks: "+obtainedMarks);
 		
-		return "";
+		//************* Put the records into 
+		
+		if(obtainedMarks >= 30) {
+			result = "Passed";
+		}
+		
+		int id = HO.getIdForTestResultTable();
+		int response = HO.insertIntoAssessmentResults(id,forUser, assignmentName+"-L1", obtainedMarks, result);
+		//TODO : Delete once not required
+		if (response == 1) {
+			System.out.println("Insertion to Assessment Result Successfull");
+		}
+		if (response != 1) {
+			System.out.println("Insertion to Assessment Result Failed");
+		}
+		return result;
 	}
 
 }

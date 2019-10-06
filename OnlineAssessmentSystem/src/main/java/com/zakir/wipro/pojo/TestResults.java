@@ -2,28 +2,34 @@ package com.zakir.wipro.pojo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Hibernate Assessment")
+@Table(name="Assessment_Results")
 public class TestResults {
+	@Id
+	@Column(name = "Id", nullable = false, unique = true)
+	private int id;
 	
-	@Column(name = "Test Date", nullable = false)
+	@Column(name = "Test_Date")
 	private String testDate;
 	
-	@Column(name = "Assessment", nullable = false)
+	@Column(name = "Assessment")
 	private String assessmentName;
 	
-	@Column(name = "Test Marks", nullable = false)
-	private String testMarks;
+	@Column(name = "Test_Marks")
+	private int testMarks;
 	
-	@Column(name = "Email Id", nullable = false)
+	@Column(name = "Email_Id")
 	private String emailId;
 	
-	@Column(name = "Total Marks", nullable = false)
-	private String totalMarks;
+	@Column(name = "Total_Marks")
+	private int totalMarks;
 	
-	@Column(name = "Result", nullable = false)
+	@Column(name = "Result")
 	private String result;
 	
 	
@@ -39,22 +45,28 @@ public class TestResults {
 	public void setAssessmentName(String assessmentName) {
 		this.assessmentName = assessmentName;
 	}
-	public String getTestMarks() {
+	public int getTestMarks() {
 		return testMarks;
 	}
-	public void setTestMarks(String testMarks) {
+	public void setTestMarks(int testMarks) {
 		this.testMarks = testMarks;
 	}
 	public String getEmailId() {
 		return emailId;
 	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
-	public String getTotalMarks() {
+	public int getTotalMarks() {
 		return totalMarks;
 	}
-	public void setTotalMarks(String totalMarks) {
+	public void setTotalMarks(int totalMarks) {
 		this.totalMarks = totalMarks;
 	}
 	public String getResult() {

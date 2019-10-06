@@ -10,12 +10,7 @@
 <link href="<c:url value = "/Resources/style.css" />" rel="stylesheet">
 </head>
 <body>
-	<%
-		if(session.getAttribute("userSession")==null ) {
-			System.out.println(session.getAttribute("userSession").toString());
-			response.sendRedirect("login");
-		}
-	%>
+	<h1 style="text-align: center">Hibernate Assessment</h1>
 	<spring:url value="/evaluate/hibernate/test" var="evaluation" htmlEscape="true"/>
 	<div class="question-paper">
 		<form:form action="${ evaluation }" modelAttribute="selectedOption" method="post">
