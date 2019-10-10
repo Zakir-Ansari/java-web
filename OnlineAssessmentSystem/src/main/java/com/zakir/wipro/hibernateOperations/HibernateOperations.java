@@ -18,7 +18,7 @@ public class HibernateOperations {
 	public static Session session = null;
 
 	public Session getSessionForUserDetails(Class<?> clazz) {
-		Configuration con = new Configuration().configure().addAnnotatedClass(clazz);
+		Configuration con = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(clazz);
 		// Get the registry object
 		ServiceRegistry reg = new ServiceRegistryBuilder().applySettings(con.getProperties()).buildServiceRegistry();
 		SessionFactory sf = con.buildSessionFactory(reg);
