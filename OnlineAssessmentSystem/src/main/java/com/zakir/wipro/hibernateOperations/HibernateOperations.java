@@ -9,8 +9,8 @@ import java.util.List;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
-
+/*import org.hibernate.service.ServiceRegistryBuilder;
+*/
 import com.zakir.wipro.pojo.TestResults;
 import com.zakir.wipro.pojo.UserDetails;
 
@@ -18,10 +18,18 @@ public class HibernateOperations {
 	public static Session session = null;
 
 	public Session getSessionForUserDetails(Class<?> clazz) {
-		Configuration con = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(clazz);
-		// Get the registry object
-		ServiceRegistry reg = new ServiceRegistryBuilder().applySettings(con.getProperties()).buildServiceRegistry();
-		SessionFactory sf = con.buildSessionFactory(reg);
+		/*
+		 * Configuration con = new
+		 * Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(clazz); //
+		 * Get the registry object ServiceRegistry reg = new
+		 * ServiceRegistryBuilder().applySettings(con.getProperties()).
+		 * buildServiceRegistry();
+		 */
+		/*
+		 * SessionFactory sf = con.buildSessionFactory(reg);
+		 */		
+		
+		SessionFactory sf = new HibernateUtil().getSessionFactory(clazz);
 		session = sf.openSession();
 
 		return session;
@@ -41,7 +49,7 @@ public class HibernateOperations {
 	public void initialDataUpdate() {
 		UserDetails u1 = new UserDetails();
 		UserDetails u2 = new UserDetails();
-		System.out.println("session: " + session);
+		//System.out.println("session: " + session);
 
 		u1.setEmail("roger@gmail.com");
 		u1.setPassword("wipro@123");
@@ -59,7 +67,7 @@ public class HibernateOperations {
 			session = getSessionForUserDetails(UserDetails.class);
 		}
 		Transaction tx = null;
-		System.out.println("session: " + session);
+		//System.out.println("session: " + session);
 
 		try {
 
@@ -68,7 +76,7 @@ public class HibernateOperations {
 				session.save(u1);
 				session.save(u2);
 				tx.commit();
-				System.out.println("Initial admin data stored in database");
+				//System.out.println("Initial admin data stored in database");
 			}
 			
 		} catch (HibernateException e) {
@@ -79,15 +87,15 @@ public class HibernateOperations {
 		finally {
 			closeSession();
 		}
-		System.out.println("Session closed : session = "+session);
+		//System.out.println("Session closed : session = "+session);
 	}
 
 	public UserDetails getUserDetails(String userEmail) {
-		System.out.println("session: " + session);
+		//System.out.println("session: " + session);
 		if (session == null || session.isOpen() == false) {
 			session = getSessionForUserDetails(UserDetails.class);
 		}
-		System.out.println("session: " + session);
+		//System.out.println("session: " + session);
 
 		Transaction tx = null;
 		UserDetails user = null;
@@ -99,7 +107,7 @@ public class HibernateOperations {
 			List userDetails = query.list();
 			for (Iterator iterator = userDetails.iterator(); iterator.hasNext();) {
 				user = (UserDetails) iterator.next();
-				System.out.println("After select query: user email:"+user.getEmail());
+				//System.out.println("After select query: user email:"+user.getEmail());
 			}
 			tx.commit();
 		} catch (HibernateException e) {
@@ -140,7 +148,7 @@ public class HibernateOperations {
 	
 	public String addCandidate(String fname, String lname, String email, String password, String uType) {
 		String response= "failure";
-		System.out.println("session: " + session);
+		//System.out.println("session: " + session);
 		if (session == null || session.isOpen() == false) {
 			session = getSessionForUserDetails(UserDetails.class);
 		}
@@ -157,7 +165,7 @@ public class HibernateOperations {
 			
 			session.save(newUser);
 			tx.commit();
-			System.out.println("Data Saved");
+			//System.out.println("Data Saved");
 			response = "success";
 		} catch(Exception ex) {
 			if (tx!=null) tx.rollback();
@@ -190,11 +198,11 @@ public class HibernateOperations {
 	}
 	
 	public String dropTableInitially() {
-		System.out.println("session: " + session);
+		//System.out.println("session: " + session);
 		if (session == null || session.isOpen() == false) {
 			session = getSessionForUserDetails(UserDetails.class);
 		}
-		System.out.println("session: " + session);
+		//System.out.println("session: " + session);
 
 		Transaction tx = null;
 		
@@ -203,7 +211,7 @@ public class HibernateOperations {
 			String hql = "delete from UserDetails where user_type = 'candidate'";
 			session.createQuery(hql).executeUpdate();
 			tx.commit();
-			System.out.println("Deletion Done!!");
+			//System.out.println("Deletion Done!!");
 		} catch (HibernateException e) {
 			if (tx != null)
 				tx.rollback();
@@ -216,11 +224,11 @@ public class HibernateOperations {
 	
 	public String dropAssessmentTableInitially() {
 		closeSession();
-		System.out.println("session: " + session);
+		//System.out.println("session: " + session);
 		if (session == null || session.isOpen() == false) {
 			session = getSessionForUserDetails(TestResults.class);
 		}
-		System.out.println("session: " + session);
+		//System.out.println("session: " + session);
 
 		Transaction tx = null;
 		
@@ -234,7 +242,7 @@ public class HibernateOperations {
 			 * session.delete(tr);
 			 */
 			tx.commit();
-			System.out.println("Deletion Done!!");
+			//System.out.println("Deletion Done!!");
 		} catch (HibernateException e) {
 			if (tx != null)
 				tx.rollback();
@@ -247,7 +255,7 @@ public class HibernateOperations {
 	
 	public int insertIntoAssessmentResults(int id, String userEmail, String assessment, int score, String result ) {
 		int response = 0;
-		System.out.println("hibernate session in insert Into AssessmentResult: " + session);
+		//System.out.println("hibernate session in insert Into AssessmentResult: " + session);
 		closeSession();
 		if (session == null || session.isOpen() == false) {
 			session = getSessionForUserDetails(TestResults.class);
@@ -256,7 +264,7 @@ public class HibernateOperations {
 	    SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");  
 	    Date date = new Date();  
 	    String dateTime = formatter.format(date);
-	    System.out.println("saved date: "+ dateTime);  
+	    //System.out.println("saved date: "+ dateTime);  
 		
 		
 		Transaction tx = null;
@@ -274,7 +282,7 @@ public class HibernateOperations {
 			
 			session.save(testResult);
 			tx.commit();
-			System.out.println("Data Saved");
+			//System.out.println("Data Saved");
 			response = 1;
 		} catch(Exception ex) {
 			if (tx!=null) tx.rollback();
@@ -320,14 +328,14 @@ public class HibernateOperations {
 			session = getSessionForUserDetails(TestResults.class);
 		}
 		Transaction tx = null;
-		System.out.println("new Id initially: "+newId);
+		//System.out.println("new Id initially: "+newId);
 		try {
 			tx = session.beginTransaction();
 			List assessmentResults = session.createQuery("FROM TestResults tr").list();
 			for (Iterator iterator = assessmentResults.iterator(); iterator.hasNext();){
 				TestResults testResult = (TestResults) iterator.next(); 
 				newId++;
-				System.out.println("new Id got: "+newId);
+				//System.out.println("new Id got: "+newId);
 	         }
 			tx.commit();
 		}

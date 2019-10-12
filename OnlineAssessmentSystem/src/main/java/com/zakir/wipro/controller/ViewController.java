@@ -62,13 +62,13 @@ public class ViewController {
 
 	@RequestMapping(value = "/validate", method = RequestMethod.POST)
 	public String validate(@ModelAttribute("userDetails") User user, Model model) {
-		System.out.println("email: " + user.getEmail());
-		System.out.println("password: " + user.getPassword());
+		//System.out.println("email: " + user.getEmail());
+		//System.out.println("password: " + user.getPassword());
 		Validate validate = new Validate();
 		validity = validate.validateUser(user.getEmail(), user.getPassword());
 		if (!validity.isEmpty() && validity != null) {
 			userSession = user.getEmail();
-			System.out.println("Got Session: "+userSession);
+			//System.out.println("Got Session: "+userSession);
 		}
 		
 		
@@ -77,7 +77,7 @@ public class ViewController {
 	
 	@RequestMapping(value = "/login/do", method = RequestMethod.GET)
 	public String getHome(Model model) {
-		System.out.println("Validity got: "+validity);
+		//System.out.println("Validity got: "+validity);
 		if(validity == null || validity.isEmpty() || userSession == null) {
 			return "redirect:/login";
 		}
@@ -139,7 +139,7 @@ public class ViewController {
 	//registration/do
 	@RequestMapping(value="/registration/do", method = RequestMethod.POST)
 	public String registrationSuccessfullPage(@ModelAttribute("registrationDetails") RegistrationDetails registrationDetails, Model model) {
-		System.out.println("Registration deatails" + registrationDetails.toString());
+		//System.out.println("Registration deatails" + registrationDetails.toString());
 		UserDetails userExist = hibernateOperations.getUserDetails(registrationDetails.getEmail());
 		if(userExist != null) {
 			this.userExist = "yes";
@@ -188,19 +188,19 @@ public class ViewController {
 			return "redirect:/login";
 		}
 		
-		System.out.println(selectedOption.toString());
-		System.out.println(userSession.toString());
+		//System.out.println(selectedOption.toString());
+		//System.out.println(userSession.toString());
 		EvaluateMarks evaluate = new EvaluateMarks();
 		String result = evaluate.getEvaluations(selectedOption, userSession, "Spring");
 		if(result.equalsIgnoreCase("Passed")) {
 			model.addAttribute("resultMessage","Congratulations!!! You have passed!!!");
 			model.addAttribute("title","Success Page");
-			System.out.println("Passed-if");
+			//System.out.println("Passed-if");
 		}
 		else {
 			model.addAttribute("resultMessage","Sorry!!! Better Luck Next Time!!!");
 			model.addAttribute("title","Failure Page");
-			System.out.println("Failed-if");
+			//System.out.println("Failed-if");
 		}
 		return "assessment-result";
 	}
@@ -211,19 +211,19 @@ public class ViewController {
 			return "redirect:/login";
 		}
 		
-		System.out.println(selectedOption.toString());
-		System.out.println(userSession.toString());
+		//System.out.println(selectedOption.toString());
+		//System.out.println(userSession.toString());
 		EvaluateMarks evaluate = new EvaluateMarks();
 		String result = evaluate.getEvaluations(selectedOption, userSession, "Hibernate");
 		if(result.equalsIgnoreCase("Passed")) {
 			model.addAttribute("resultMessage","Congratulations!!! You have passed!!!");
 			model.addAttribute("title","Success Page");
-			System.out.println("Passed-if");
+			//System.out.println("Passed-if");
 		}
 		else {
 			model.addAttribute("resultMessage","Sorry!!! Better Luck Next Time!!!");
 			model.addAttribute("title","Failure Page");
-			System.out.println("Failed-if");
+			//System.out.println("Failed-if");
 		}
 		return "assessment-result";
 	}

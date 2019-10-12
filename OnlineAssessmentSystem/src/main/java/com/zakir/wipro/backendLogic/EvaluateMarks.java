@@ -7,13 +7,13 @@ import com.zakir.wipro.pojo.SpringAssessment;
 
 public class EvaluateMarks {
 	public String getEvaluations(SelectedOptions selectedOption, String forUser, String assignmentName) {
-		System.out.println("User name got: "+forUser);
+		//System.out.println("User name got: "+forUser);
 		HibernateAssessment HA = new HibernateAssessment();
 		HibernateOperations HO = new HibernateOperations();
 		SpringAssessment SA = new SpringAssessment();
 		String result = "Failed";
 		int obtainedMarks =0;
-		System.out.println("initial Marks: "+obtainedMarks);
+		//System.out.println("initial Marks: "+obtainedMarks);
 		
 		if(assignmentName.equalsIgnoreCase("Hibernate")) {
 			if(selectedOption.getForQuestion1().equalsIgnoreCase(HA.getQue1Ans())) obtainedMarks = obtainedMarks + 10;
@@ -29,7 +29,7 @@ public class EvaluateMarks {
 			if(selectedOption.getForQuestion4().equalsIgnoreCase(SA.getQue4Ans())) obtainedMarks = obtainedMarks + 10;
 			if(selectedOption.getForQuestion5().equalsIgnoreCase(SA.getQue5Ans())) obtainedMarks = obtainedMarks + 10;
 		}
-		System.out.println("Final marks: "+obtainedMarks);
+		//System.out.println("Final marks: "+obtainedMarks);
 		
 		//************* Put the records into 
 		
@@ -39,13 +39,6 @@ public class EvaluateMarks {
 		
 		int id = HO.getIdForTestResultTable();
 		int response = HO.insertIntoAssessmentResults(id,forUser, assignmentName+"-L1", obtainedMarks, result);
-		//TODO : Delete once not required
-		if (response == 1) {
-			System.out.println("Insertion to Assessment Result Successfull");
-		}
-		if (response != 1) {
-			System.out.println("Insertion to Assessment Result Failed");
-		}
 		return result;
 	}
 

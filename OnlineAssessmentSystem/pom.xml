@@ -41,7 +41,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.1.6.Final</version>
+			<version>5.3.7.Final<!-- 4.1.6.Final --></version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
@@ -55,7 +55,7 @@
 	</dependencies>
 	<build>
 		<finalName>OnlineAssessmentSystem</finalName>
-		<sourceDirectory>src/main/resources</sourceDirectory>
+		<sourceDirectory>src/main/java</sourceDirectory>
 		<pluginManagement>
 			<plugins>
 				<plugin>
